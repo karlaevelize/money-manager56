@@ -1,23 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
+import { useSelector, useDispatch } from "react-redux"
+import { selectAmount } from "./store/balance/selector"
+import { deposit } from "./store/balance/actions"
 
 function App() {
+
+  const amount = useSelector(selectAmount)
+  // console.log("amount", amount)
+
+  const dispatch = useDispatch()
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>My Redux App</h1>
+      <p>Total amount: <b>{amount}</b></p>
+      <button onClick={() => dispatch(deposit(10))}>+ 10</button>
+      <button onClick={() => dispatch(deposit(-10))}>- 10</button>
+
     </div>
   );
 }
